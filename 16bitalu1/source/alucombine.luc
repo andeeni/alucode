@@ -1,0 +1,39 @@
+module alucombine ( 
+    input alufn[6],
+    input a[16],
+    input b[16],
+    output out[16],
+    output n,
+    output z,
+    output v
+  ) {
+  
+  .a(a){
+    .b(b){
+     .alufn(alufn[5:0]){
+        add addmul;
+        boolean bol;
+        compare cmp;
+        shifter shf;
+      }
+    }
+  }
+
+  always {
+  out = 0;
+    case(alufn[5:4]){
+      0: if (alufn[1]==1){out=addmul.out;z=0;v=0;n=0;}
+         else {out = addmul.out;z = addmul.z; v= addmul.v; n =addmul.n;}
+      1: out = bol.out;z = 0; v = 0; n = 0;
+      2: out = shf.out;z = 0; v = 0; n = 0;
+      3: out = cmp.out;z = 0; v = 0; n = 0;
+      
+      default: out = 0;z = 0; v = 0; n = 0;
+      
+    }
+
+    
+
+   
+  }
+}

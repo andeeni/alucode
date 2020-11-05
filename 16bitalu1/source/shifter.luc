@@ -1,0 +1,22 @@
+module shifter (  
+    input alufn[6],
+    input a[16],
+    input b[16],
+    output out[16]
+  ) {
+
+  always {
+    out = 0;
+    ///
+    case(alufn[1:0]){
+    //b is shifter while a being shift 
+    // 00 --> shift left
+    0:out = a <<b[3:0];
+    // 01 --> shift right
+    1: out = a>>b[3:0];
+    //11 --> shift right with sign extension 
+    3:out = $signed(a) >>> b[3:0];
+    default: out = 0;
+    }
+  }
+}

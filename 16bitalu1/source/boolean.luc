@@ -1,0 +1,22 @@
+module boolean (
+    input alufn[6],
+    input a[16],
+    input b[16],
+    output out[16]
+  ) {
+
+  always {
+    case(alufn[3:0]){
+      //AND: 1000 = 8
+      8:out = a&b;
+      //OR: 1100 = 14
+      14:out = a|b;
+      //XOR: 0110 = 6
+      6: out = a^b;
+      //"A":1010 = 10
+      10:out = a;
+      
+      default: out = 0;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+module add (
+    input alufn[6],
+    input a[16],
+    input b[16],
+    output out[16],
+    output z,
+    output v,
+    output n  
+  ){
+  sig result[16];
+  always {
+//alufn0 = 0 then add, otherwise substract
+    if(alufn[1:0] == 0){
+    result = a+b;
+    }
+    else if (alufn[1:0]==1){
+    result = a-b;
+    }else{
+    result = a*b;
+    }
+    
+    out = result;
+
+//z =1 when output all zero
+    if(result == 0 ) {
+    z = 1;
+    }
+    else{
+    z = 0;
+    }
+//n =1 when output is negative -->negative when front bit = 1
+    n = result[15];
+//v = 1 when overflow --> formula in lab handout
+    v = (a[15]&(alufn[0]^b[15])& ~result[15])|(~a[15] & ~(alufn[0]^b[15])& result[15]);

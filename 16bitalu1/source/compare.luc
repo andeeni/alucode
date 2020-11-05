@@ -1,0 +1,19 @@
+module compare (
+    input alufn[6],
+    input a[16],
+    input b[16],
+    output out[16]
+  ) {
+  always {
+    out = 0;
+    case(alufn[2:1]){
+      //A=B: 01 = 1
+      1: out = c{15b0, (a==b)};
+      //A<B: 10 = 2
+      2: out = c{15b0, (a<b)};
+      //A>B: 11 = 3
+      3: out = c{15b0, (a<=b)};
+      default: out = 0;
+    }
+  }
+}
